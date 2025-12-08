@@ -10,7 +10,21 @@ and `phytochempy`, see https://github.com/alrichardbollans/phytochempy
 
 then to install, run:
 
-`pip install git+https://github.com/alrichardbollans/MiningPhytochemicals`
+`pip install git+https://github.com/alrichardbollans/phytochemMiner`
+
+
+## Usage Example
+
+```python
+from phytochemMiner import get_phytochem_model, run_phytochem_model
+
+model, limit = get_phytochem_model(dotenv_path='.env')
+fulltextpath = 'path_to_txt_file.txt'
+run_phytochem_model(model, fulltextpath,
+                    limit,
+                    pkl_dump='output_pkl_file.pkl')
+
+```
 
 ### References & Acknowledgements
 Petr Knoth et al., ‘CORE: A Global Aggregation Service for Open Access Papers’, Scientific Data 10, no. 1 (2023): 366, https://doi.org/10.1038/s41597-023-02208-w.

@@ -16,5 +16,5 @@ setup(
     license='Attribution-NonCommercial-ShareAlike 4.0 International',
     author='Adam Richard-Bollans',
     description='A package for extracting mentions of phytochemicals from scientific articles.',
-    long_description=open('readme.md', encoding="utf8").read()
+    long_description=open('README.md', encoding="utf8").read()
 )
