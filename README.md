@@ -16,7 +16,7 @@ then to install, run:
 ## Usage Example
 
 ```python
-from phytochemMiner import get_phytochem_model, run_phytochem_model
+from phytochemMiner.running_models import get_phytochem_model, run_phytochem_model
 
 model, limit = get_phytochem_model(dotenv_path='.env')
 fulltextpath = 'path_to_txt_file.txt'
