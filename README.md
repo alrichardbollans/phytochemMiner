@@ -1,6 +1,6 @@
 ## 
 
-A repo to build data linking compounds, the plants they occur in and the scientific papers reporting this.
+A pipeline using DeepSeek to extract phytochemical data from literature sources.
 
 ## Installation
 
@@ -22,9 +22,14 @@ model, limit = get_phytochem_model(dotenv_path='.env')
 fulltextpath = 'path_to_txt_file.txt'
 run_phytochem_model(model, fulltextpath,
                     limit,
-                    pkl_dump='output_pkl_file.pkl')
+                    json_dump='output_json_file.json')
 
 ```
+
+### Manual verification
+
+Outputs from this process (the `json_dump` files) can be manually verified using our reference verifier shiny app, hosted here: https://huggingface.co/spaces/alrichardbollans/PhytochemReferenceVerifier
+
 
 ### References & Acknowledgements
 Petr Knoth et al., ‘CORE: A Global Aggregation Service for Open Access Papers’, Scientific Data 10, no. 1 (2023): 366, https://doi.org/10.1038/s41597-023-02208-w.

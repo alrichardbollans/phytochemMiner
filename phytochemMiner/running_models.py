@@ -1,22 +1,25 @@
+import json
 import os
-import pickle
 
 import langchain_core
 import pydantic_core
 
-from phytochemMiner import add_inchi_keys, read_file_and_chunk, standard_prompt, TaxaData, \
-    deduplicate_and_standardise_output_taxa_lists, add_all_extra_info_to_output, get_txt_from_file
+from phytochemMiner import read_file_and_chunk, standard_prompt, TaxaData, \
+    deduplicate_and_standardise_output_taxa_lists, get_txt_from_file
+from phytochemMiner.extending_model_outputs import add_inchi_keys, add_all_extra_info_to_output
 
 
-def run_phytochem_model(model, text_file: str, context_window: int, pkl_dump: str = None,
+def run_phytochem_model(model, text_file: str, context_window: int, json_dump: str = None,
                         single_chunk: bool = True, rerun=True, rerun_inchi_resolution: bool = True) -> TaxaData:
-    if not rerun and os.path.exists(pkl_dump):
-        with open(pkl_dump, "rb") as file_:
-            output = pickle.load(file_)
+    if not rerun and os.path.exists(json_dump):
+        with open(json_dump, "r") as file_:
+            json_dict = json.load(file_)
+            output = TaxaData.model_validate(json_dict)
         if rerun_inchi_resolution:
             add_inchi_keys(output)
-            with open(pkl_dump, "wb") as file_:
-                pickle.dump(output, file_)
+            with open(json_dump, "w") as file_:
+                json_out = output.model_dump(mode="json")
+                json.dump(json_out, file_)
         return output
 
     if not single_chunk:
@@ -81,9 +84,10 @@ def run_phytochem_model(model, text_file: str, context_window: int, pkl_dump: st
     text = get_txt_from_file(text_file)
     deduplicated_extractions.text = text
 
-    if pkl_dump:
-        with open(pkl_dump, "wb") as file_:
-            pickle.dump(deduplicated_extractions, file_)
+    if json_dump:
+        with open(json_dump, "w") as file_:
+            json_out = deduplicated_extractions.model_dump(mode="json")
+            json.dump(json_out, file_)
 
     return deduplicated_extractions
 
