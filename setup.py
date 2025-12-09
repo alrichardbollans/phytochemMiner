@@ -6,11 +6,14 @@ setup(
     packages=find_packages(include=['phytochemMiner']),
     install_requires=[
         'langchain_core',
+        'langchain-text-splitters',
         'pydantic_core',
         'pandas',
         'tqdm',
         'typing',
-        'langchain_deepseek'
+        'langchain_deepseek',
+        'pubchempy',
+        'cirpy'
     ],
     url='https://github.com/alrichardbollans/phytochemMiner',
     license='Attribution-NonCommercial-ShareAlike 4.0 International',
