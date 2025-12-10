@@ -18,6 +18,9 @@ then to install, run:
 ```python
 from phytochemMiner.running_models import get_phytochem_model, run_phytochem_model
 
+
+# Specify a .env file containing your deepseek API key in the form DEEPSEEK_API_KEY="key",
+# or alternatively specify the apikey directly with the apikey parameter
 model, limit = get_phytochem_model(dotenv_path='.env')
 fulltextpath = 'path_to_txt_file.txt'
 run_phytochem_model(model, fulltextpath,
