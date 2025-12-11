@@ -9,7 +9,6 @@ import pandas as pd
 
 from phytochempy.compound_properties import simplify_inchi_key
 from pubchempy import get_compounds
-from wcvpy.wcvp_download import get_all_taxa
 from wcvpy.wcvp_name_matching import get_accepted_info_from_names_in_column, get_genus_from_full_name
 
 from phytochemMiner import TaxaData, clean_compound_strings
@@ -31,10 +30,8 @@ except FileNotFoundError:
 _original_timeout = 0.34
 _timeout = [0.3]
 
-_wcvp_taxa = get_all_taxa()
 
-
-def add_accepted_info(deepseek_output: TaxaData):
+def add_accepted_info(deepseek_output: TaxaData, _wcvp_taxa: pd.DataFrame):
     deepseek_names = pd.DataFrame([c.scientific_name for c in deepseek_output.taxa], columns=['scientific_name'])
     acc_deepseek_names = get_accepted_info_from_names_in_column(deepseek_names, 'scientific_name', all_taxa=_wcvp_taxa)
     acc_deepseek_names = acc_deepseek_names.set_index('scientific_name')
@@ -158,8 +155,8 @@ def add_inchi_keys(deepseek_output: TaxaData):
     return deepseek_output
 
 
-def add_all_extra_info_to_output(deepseek_output: TaxaData):
-    add_accepted_info(deepseek_output)
+def add_all_extra_info_to_output(deepseek_output: TaxaData, wcvp: pd.DataFrame):
+    add_accepted_info(deepseek_output, wcvp)
     add_inchi_keys(deepseek_output)
     # print(deepseek_output)
 

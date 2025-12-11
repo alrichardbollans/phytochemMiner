@@ -16,15 +16,18 @@ then to install, run:
 ## Usage Example
 
 ```python
-from phytochemMiner.running_models import get_phytochem_model, run_phytochem_model
-
+from wcvpy.wcvp_download import get_all_taxa
+from phytochemMiner import get_phytochem_model, run_phytochem_model
 
 # Specify a .env file containing your deepseek API key in the form DEEPSEEK_API_KEY="key",
 # or alternatively specify the apikey directly with the apikey parameter
-model, limit = get_phytochem_model(dotenv_path='.env')
+model, token_limit = get_phytochem_model(dotenv_path='.env')
 fulltextpath = 'path_to_txt_file.txt'
+
+wcvp_taxa = get_all_taxa() # get a copy of the wcvp to add accepted names to outputs.
+
 run_phytochem_model(model, fulltextpath,
-                    limit,
+                    token_limit, wcvp_taxa,
                     json_dump='output_json_file.json')
 
 ```

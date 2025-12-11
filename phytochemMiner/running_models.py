@@ -2,14 +2,15 @@ import json
 import os
 
 import langchain_core
+import pandas as pd
 import pydantic_core
 
 from phytochemMiner import read_file_and_chunk, standard_prompt, TaxaData, \
     deduplicate_and_standardise_output_taxa_lists, get_txt_from_file
-from phytochemMiner.extending_model_outputs import add_inchi_keys, add_all_extra_info_to_output
+from phytochemMiner import add_inchi_keys, add_all_extra_info_to_output
 
 
-def run_phytochem_model(model, text_file: str, context_window: int, json_dump: str = None,
+def run_phytochem_model(model, text_file: str, context_window: int, wcvp: pd.DataFrame, json_dump: str = None,
                         single_chunk: bool = True, rerun=True, rerun_inchi_resolution: bool = True) -> TaxaData:
     if not rerun and os.path.exists(json_dump):
         with open(json_dump, "r") as file_:
@@ -79,7 +80,7 @@ def run_phytochem_model(model, text_file: str, context_window: int, json_dump: s
                 output.extend(extraction.taxa)
 
     deduplicated_extractions = deduplicate_and_standardise_output_taxa_lists(output)
-    add_all_extra_info_to_output(deduplicated_extractions)
+    add_all_extra_info_to_output(deduplicated_extractions, wcvp)
 
     text = get_txt_from_file(text_file)
     deduplicated_extractions.text = text
