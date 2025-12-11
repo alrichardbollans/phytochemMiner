@@ -4,7 +4,7 @@ A pipeline using DeepSeek to extract phytochemical data from literature sources.
 
 ## Installation
 
-Install requires requires `wcvpy>=1.3.2`, to install see https://github.com/alrichardbollans/wcvpy
+Install requires `wcvpy>=1.3.4`, to install see https://github.com/alrichardbollans/wcvpy
 
 and `phytochempy>=1.1`, see https://github.com/alrichardbollans/phytochempy
 
