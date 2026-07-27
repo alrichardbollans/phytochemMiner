@@ -4,6 +4,7 @@ setup(
     name='phytochemMiner',
     version='1.0',
     packages=find_packages(include=['phytochemMiner']),
+    package_data={"phytochemMiner": ["inputs/*"]},
     install_requires=[
         'langchain_core',
         'langchain-text-splitters',

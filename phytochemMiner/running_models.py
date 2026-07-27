@@ -6,11 +6,11 @@ import pandas as pd
 import pydantic_core
 
 from phytochemMiner import read_file_and_chunk, standard_prompt, TaxaData, \
-    deduplicate_and_standardise_output_taxa_lists, get_txt_from_file
+    deduplicate_and_standardise_output_taxa_lists, get_txt_from_file, filter_classes
 from phytochemMiner import add_inchi_keys, add_all_extra_info_to_output
 
 
-def run_phytochem_model(model, text_file: str, context_window: int, wcvp: pd.DataFrame, json_dump: str = None,
+def run_phytochem_model(model, text_file: str, context_window: int, wcvp: pd.DataFrame, remove_classes: bool = False, json_dump: str = None,
                         single_chunk: bool = True, rerun=True, rerun_inchi_resolution: bool = True) -> TaxaData:
     if not rerun and os.path.exists(json_dump):
         with open(json_dump, "r") as file_:
@@ -80,6 +80,8 @@ def run_phytochem_model(model, text_file: str, context_window: int, wcvp: pd.Dat
                 output.extend(extraction.taxa)
 
     deduplicated_extractions = deduplicate_and_standardise_output_taxa_lists(output)
+    if remove_classes:
+        filter_classes(deduplicated_extractions)
     add_all_extra_info_to_output(deduplicated_extractions, wcvp)
 
     text = get_txt_from_file(text_file)

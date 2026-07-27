@@ -48,6 +48,9 @@ Saito, Shigehiko Kanaya, “KNApSAcK Family Databases: Integrated Metabolite-Pla
 Databases for Multifaceted Plant Research,” Plant Cell Physiol., 53, e1(1-12), (2012). doi:
 10.1093/pcp/pcr165.
 
+Kim, H.W. et al. (2021) ‘NPClassifier: A Deep Neural Network-Based Structural Classification Tool for Natural Products’,
+Journal of Natural Products, 84(11), pp. 2795–2807. Available at: https://doi.org/10.1021/acs.jnatprod.1c00399.
+
 The developers acknowledge Research Computing at the James Hutton Institute for providing computational resources and technical support for the 'UK’s
 Crop Diversity Bioinformatics HPC' (BBSRC grants BB/S019669/1 and BB/X019683/1), use of which has contributed to the development of the model used in
 this analysis.
