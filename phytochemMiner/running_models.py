@@ -12,6 +12,37 @@ from phytochemMiner import add_inchi_keys, add_all_extra_info_to_output
 
 def run_phytochem_model(model, text_file: str, context_window: int, wcvp: pd.DataFrame, remove_classes: bool = False, json_dump: str = None,
                         single_chunk: bool = True, rerun=True, rerun_inchi_resolution: bool = True) -> TaxaData:
+    """
+    Run the given LLM to process a given text file and extract structured taxonomical data.
+
+    This function processes a text file using the specified model, extracts structured output, deduplicates
+    the extracted data, and optionally filters and adds extra information to the output. The processing may
+    include additional steps such as chunking the text and managing concurrency to adhere to constraints on
+    the model's usage. Optionally, the results can be saved and loaded from a JSON file to avoid redundant
+    processing. Additional configurations allow rerunning specific steps and resolving InChI keys.
+
+    :param model: The model used for extracting structured taxonomical data.
+    :param text_file: The file path of the input text to be processed.
+    :type text_file: str
+    :param context_window: The context window size for chunking the input text.
+    :type context_window: int
+    :param wcvp: DataFrame containing the WCVP (World Checklist of Vascular Plants) for reference.
+    :type wcvp: pd.DataFrame
+    :param remove_classes: A boolean indicating whether to exclude compound classes (default: False).
+    :type remove_classes: bool, optional
+    :param json_dump: Path to a JSON file for saving/loading processed data. If the file exists and rerun
+        is False, the output is loaded from this file (default: None).
+    :type json_dump: str, optional
+    :param single_chunk: Whether to process the text in a single chunk. If False, chunking logic is applied
+        for further splitting and processing (default: True).
+    :type single_chunk: bool, optional
+    :param rerun: If False and the JSON dump exists, the function avoids redundant processing and instead
+        loads the output from the JSON file (default: True).
+    :type rerun: bool, optional
+    :param rerun_inchi_resolution: If True, reruns InChI resolution for resolving keys and updates
+        the JSON file (default: True).
+    :rtype: TaxaData
+    """
     if not rerun and os.path.exists(json_dump):
         with open(json_dump, "r") as file_:
             json_dict = json.load(file_)

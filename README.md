@@ -26,6 +26,8 @@ fulltextpath = 'path_to_txt_file.txt'
 
 wcvp_taxa = get_all_taxa() # get a copy of the wcvp to add accepted names to outputs.
 
+# Note: set remove_classes=True to exclude compound classes from the output (based on the NPClassifier class ontology)
+
 run_phytochem_model(model, fulltextpath,
                     token_limit, wcvp_taxa,
                     json_dump='output_json_file.json')
