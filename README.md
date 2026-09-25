@@ -2,6 +2,8 @@
 
 A pipeline using DeepSeek to extract phytochemical data from literature sources.
 
+If you find this package useful, please cite the paper: [A Scalable Large Language Model‐Aided Approach for Mining Plant‐Compound Pairs From Scientific Literature](www.doi.org/10.1002/ppp3.70266), along with any of the relevant references for data sources described below.
+
 ## Installation
 
 Install requires `wcvpy>=1.3.4`, to install see https://github.com/alrichardbollans/wcvpy
@@ -39,7 +41,7 @@ run_phytochem_model(model, fulltextpath,
 Outputs from this process (the `json_dump` files) can be manually verified using our reference verifier shiny app, hosted here: https://huggingface.co/spaces/alrichardbollans/PhytochemReferenceVerifier
 
 
-### References & Acknowledgements
+### Acknowledgements
 Petr Knoth et al., ‘CORE: A Global Aggregation Service for Open Access Papers’, Scientific Data 10, no. 1 (2023): 366, https://doi.org/10.1038/s41597-023-02208-w.
 
 Denny Vrandečić and Markus Krötzsch, ‘Wikidata: A Free Collaborative Knowledgebase’, Communications of the ACM 57, no. 10 (2014): 78–85.
